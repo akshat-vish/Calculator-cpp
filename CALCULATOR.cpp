@@ -2,7 +2,7 @@
 #include <cmath>
 using namespace std;
 
-class CALCULATOR {
+class CALCULATOR {                       //MAIN CLASS
     public:
     double add(double x, double y );
     double sub(double x, double y );
@@ -14,7 +14,7 @@ class CALCULATOR {
 
 };
 
-class Scientific_calculator : public CALCULATOR{
+class Scientific_calculator : public CALCULATOR{         //DERIVED CLASS
     public:
             double power(double x,double y){
                 return pow(x,y);
@@ -39,7 +39,9 @@ int main(){
     double x = 0;
     double y = 0;
     int mode;
+    int angleMode;
     int choice;
+    int sciChoice;
     double result;
     CALCULATOR obj1;
     Scientific_calculator obj2;
@@ -54,7 +56,7 @@ int main(){
     cin >> mode;
 
     obj1.type(mode);
-    if (mode == 1)
+    if (mode == 1) // NORMAL MODE
     {
     cout << "SELECT 1 - ADD" << endl;
     cout << "SELECT 2 - SUB" << endl;
@@ -80,9 +82,50 @@ int main(){
     cout <<"OUTPUT : " << result << endl;
       }
     
-    else if(mode == 2){
-        cout << "Scientific mode.......soon" << endl;
+    else if(mode == 2) // SCIENTIFIC MODE 
+    {
+    cout << "SELECT 1 - POWER" << endl;
+    cout << "SELECT 2 - SQUARE ROOT" << endl;
+    cout << "SELECT 3 - SINE" << endl;
+    cout << "SELECT 4 - COSINE" << endl;
+    cout << "SELECT 5 - TANGENT" << endl;
+    cout << "ENTER YOUR OPERATION : " << endl;
+
+    cin >> sciChoice ;
+    if(sciChoice == 1){
+        cin >> x >> y;
+        result = obj2.power(x, y);
     }
+        else if(sciChoice == 2){
+        cin >> x;
+        result = obj2.sqroot(x);
+    }
+
+
+        else if(sciChoice >= 3 && sciChoice <= 5){
+        cout << "Select Angle Mode:" << endl;
+        cout << "1. Degree" << endl;
+        cout << "2. Radian" << endl;
+        cin >> angleMode;
+
+        cout << "Enter value: ";
+        cin >> x;
+        
+        if(angleMode == 1){
+            x = x * (3.14159 / 180); // convert to radians
+        }
+        if(sciChoice == 3) result = obj2.sine(x);
+        else if(sciChoice == 4) result = obj2.cosine(x);
+        else if(sciChoice == 5) result = obj2.tangent(x);
+    }
+
+     else {
+            cout << "Invalid choice" << endl;
+            continue;
+        }
+
+    cout << "OUTPUT: " << result << endl;
+}
     
       }
     while(choice != 5);
